@@ -64,14 +64,29 @@ public class MenuDialog(IContactService contactService)
     }
     public void CreateContacts()
     {
-        var contacts = ContactFactory.Create();
+        Console.Clear();
+        Console.WriteLine("--- Create a new contact ---");
 
+        var contacts = ContactFactory.Create();
+        Console.WriteLine("Enter a name: ");
         contacts.FirstName = Console.ReadLine()!;
+
+        Console.WriteLine("Enter a lastname: ");
         contacts.LastName = Console.ReadLine()!;
+
+        Console.WriteLine("Enter an email: ");
         contacts.Email = Console.ReadLine()!;
+
+        Console.WriteLine("Enter a phonenumber: ");
         contacts.Phone = Console.ReadLine()!;
+
+        Console.WriteLine("Enter an address: ");
         contacts.Address = Console.ReadLine()!;
+
+        Console.WriteLine("Enter a postalcode: ");
         contacts.PostalCode = Console.ReadLine()!;
+
+        Console.WriteLine("Enter a city: ");
         contacts.City = Console.ReadLine()!;
 
         var result = _contactService.CreateContact(contacts);
@@ -86,7 +101,9 @@ public class MenuDialog(IContactService contactService)
 
     public void ViewContacts()
     {
+
         Console.Clear();
+        Console.WriteLine("--- All contacts ---");
 
         foreach (var contact in _contactService.GetAllContacts())
         {
@@ -99,6 +116,8 @@ public class MenuDialog(IContactService contactService)
             Console.WriteLine($"{"City: ",-3}{contact.City}");
             Console.WriteLine("------------------------");
         }
+
+        Console.ReadKey();
     }
 
     public void InvalidOption()
