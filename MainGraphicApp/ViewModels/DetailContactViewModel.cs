@@ -6,23 +6,21 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MainGraphicApp.ViewModels;
 
-public partial class AddContactViewModel(IServiceProvider serviceProvider, IContactService contactService) : ObservableObject
+public partial class DetailContactViewModel(IServiceProvider serviceProvider) : ObservableObject
 {
-    private readonly IContactService _contactService = contactService;
     private readonly IServiceProvider _serviceProvider = serviceProvider;
 
     [ObservableProperty]
     private Contact _contact = new();
 
     [RelayCommand]
-    private void Save()
+    private void GoToEdit()
     {
-        var result = _contactService.CreateContact(Contact);
-        if (result)
-        {
-            var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
-            mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ContactViewModel>();
-        }
+        var contactEditViewModel = _serviceProvider.GetRequiredService<EditContactViewModel>();
+        contactEditViewModel.Contact = Contact;
+
+        var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
+        mainViewModel.CurrentViewModel = contactEditViewModel;
 
     }
 

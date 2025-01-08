@@ -5,20 +5,47 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainGraphicApp.Views"
              xmlns:viewmodels="clr-namespace:MainGraphicApp.ViewModels"
+             xmlns:models="clr-namespace:Business.Models;assembly=Business"
              d:DataContext="{d:DesignInstance Type=viewmodels:AddContactViewModel}"
              
+             Background="White"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="400">
-    <Grid>
+             d:DesignHeight="550" d:DesignWidth="400">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="{Binding Title}" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="New Contact" FontSize="20" FontWeight="Bold" />
+        
+        <StackPanel Grid.Row="1" Margin="0 15 0 0">
+            <TextBlock Text="First name" />
+            <TextBox Text="{Binding Contact.FirstName}" Margin="0,0,0,10" Padding="4" />
+
+            <TextBlock Text="Last name" />
+            <TextBox Text="{Binding Contact.LastName}" Margin="0,0,0,10" Padding="4" />
+
+            <TextBlock Text="Email" />
+            <TextBox Text="{Binding Contact.Email}" Margin="0,0,0,10" Padding="4" />
+
+            <TextBlock Text="Phone" />
+            <TextBox Text="{Binding Contact.Phone}" Margin="0,0,0,10" Padding="4" />
+
+            <TextBlock Text="Address" />
+            <TextBox Text="{Binding Contact.Address}" Margin="0,0,0,10" Padding="4" />
+
+            <TextBlock Text="Postal code" />
+            <TextBox Text="{Binding Contact.PostalCode}" Margin="0,0,0,10" Padding="4" />
+
+            <TextBlock Text="City" />
+            <TextBox Text="{Binding Contact.City}" Margin="0,0,0,10" Padding="4" />
         </StackPanel>
 
-        <Button Grid.Row="1" Content="Go Back" Padding="8" Command="{Binding GoToContactsCommand}"/>
+        <StackPanel Grid.Row="2">
+            <Button Command="{Binding SaveCommand}" Content="Save" Margin="5" Padding="8" />
+            <Button Command="{Binding GoToContactsCommand}" Content="Go Back" Margin="5 5 5 5" Padding="8"/>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -5,25 +5,48 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainGraphicApp.Views"
              xmlns:viewModels="clr-namespace:MainGraphicApp.ViewModels"
+             xmlns:models="clr-namespace:Business.Models;assembly=Business"
              d:DataContext="{d:DesignInstance Type=viewModels:ContactViewModel}"
              
              mc:Ignorable="d" 
              Background="White"
-             d:DesignHeight="450" d:DesignWidth="400">
-    <Grid>
+             d:DesignHeight="550" d:DesignWidth="400">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <TextBlock Text="{Binding Title}" />
+            <TextBlock Text="All Contacts" FontSize="20" FontWeight="bold" />
         </StackPanel>
-        
-        <Button Grid.Row="1" Padding="8" Margin="5 10" Content="Add New Contact" Command="{Binding GoToAddContactCommand}" />
 
-        <Button Grid.Row="2" Padding="8" Margin="5 10" Content="Edit A Contact" Command="{Binding GoToEditContactCommand}" />
+        <ListView Grid.Row="1" ItemsSource="{Binding Contacts}" Margin=" 5 20" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="models:Contact">
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{Binding FirstName}" />
+                            <TextBlock Text="{Binding Email}" FontSize="10" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <Button CommandParameter="{Binding .}" Command="{Binding DataContext.GoToDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" Content="&#xE712;" FontFamily="Segoe MDL2 Assets" Padding="7 0" Background="Transparent" />
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <Button Grid.Row="2" Padding="8" Margin="5 10" Content="Add New Contact" Command="{Binding GoToAddContactCommand}" />
 
     </Grid>
 </UserControl>

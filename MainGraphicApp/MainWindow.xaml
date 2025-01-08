@@ -28,6 +28,10 @@
                     <views:EditContactView />
                 </DataTemplate>
 
+                <DataTemplate DataType="{x:Type viewmodels:DetailContactViewModel}">
+                    <views:DetailContactView />
+                </DataTemplate>
+
             </ContentControl.Resources>
         </ContentControl>
 
