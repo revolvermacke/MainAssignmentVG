@@ -5,10 +5,12 @@ using System.Diagnostics;
 
 namespace Business.Services;
 
-public class ContactService(IContactRepository contactRepository) : IContactService
+public class ContactService(IContactRepository contactRepository, IFileService fileService) : IContactService
 {
+    private readonly IFileService _fileService = fileService;
     private readonly IContactRepository _contactRepository = contactRepository;
     private List<Contact> _contacts = [];
+
 
     public bool CreateContact(Contact contact)
     {
@@ -61,5 +63,22 @@ public class ContactService(IContactRepository contactRepository) : IContactServ
         }
     }
 
-    
+    public bool DeleteContact(string id)
+    {
+        // Hitta kontakten med det angivna ID:t
+        var contact = _contacts.FirstOrDefault(c => c.Id == id);
+
+        if (contact != null)
+        {
+            // Ta bort kontakten från listan
+            _contacts.Remove(contact);
+            var result = _contactRepository.SaveContacts(_contacts);
+            return true; // Indikerar att borttagningen lyckades
+        }
+
+        return false; // Indikerar att kontakten inte hittades
+    }
+
+
+
 }

@@ -39,6 +39,7 @@
 
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                             <Button CommandParameter="{Binding .}" Command="{Binding DataContext.GoToDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" Content="&#xE712;" FontFamily="Segoe MDL2 Assets" Padding="7 0" Background="Transparent" />
+                            <Button CommandParameter="{Binding .}" Command="{Binding DataContext.DeleteContactCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" Content="X" FontWeight="bold" Background="#b22222" Padding="10 0" Margin="5 0 0 0"/>
                         </StackPanel>
 
                     </Grid>

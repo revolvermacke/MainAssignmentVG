@@ -8,4 +8,6 @@ public interface IContactService
     IEnumerable<Contact> GetAllContacts();
 
     bool UpdateContact(Contact contact);
+
+    bool DeleteContact(string id);
 }
